@@ -3,9 +3,13 @@ import { WeatherEmbed } from './components/WeatherEmbed';
 import { Container } from '@mui/material';
 import SearchBar from '@mkyy/mui-search-bar';
 
+function getParameterByName(name: string) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
 function App() {
-    // @ts-expect-error Yes, I know this is possibly null, it's handled below.
-    const city = window.location.search.match(/(?<=city=)\w+/)[0];
+    const city = getParameterByName("city") || "Toronto";
 
     let tempcity = "";
     return (
